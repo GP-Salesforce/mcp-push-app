@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286223524442",
+    "project_id": "mcp-push-demo",
+    "storage_bucket": "mcp-push-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286223524442:android:e4c97cfd1433a3b0ee6e63",
+        "android_client_info": {
+          "package_name": "com.goldenplanet.mcppushdemo_aos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhq_U8r9bBLfow0HWYaiZhdeC-Yb6Qu6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
