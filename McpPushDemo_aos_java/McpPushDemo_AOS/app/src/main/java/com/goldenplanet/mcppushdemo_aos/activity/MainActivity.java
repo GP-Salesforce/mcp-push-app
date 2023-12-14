@@ -1,8 +1,10 @@
-package com.goldenplanet.mcppushdemo_aos;
+package com.goldenplanet.mcppushdemo_aos.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.goldenplanet.mcppushdemo_aos.R;
 
 public class MainActivity extends AppCompatActivity {
 
