@@ -24,6 +24,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false //proguard 난독화
+            debuggable true //디버깅 허용여부
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
