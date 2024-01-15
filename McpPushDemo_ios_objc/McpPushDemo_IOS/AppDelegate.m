@@ -10,13 +10,59 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) Evergage *evergage;
+
 @end
 
 @implementation AppDelegate
 
 
+
+
+
+//SDK 초기화
+- (void)configureMcpSDK {
+    self.evergage = [Evergage sharedInstance];
+#ifdef DEBUG
+    self.evergage.logLevel = EVGLogLevelWarn;
+#endif
+    
+    //테스트용 정보 설정 코드
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userId = [userDefaults objectForKey:@"PREFERENCE_KEY_USER_ID"];
+    if (userId == nil) {
+        [userDefaults setObject:@"gp_nhkim" forKey:@"PREFERENCE_KEY_USER_ID"];
+        [userDefaults synchronize];
+    }
+    
+    NSString *account = [userDefaults objectForKey:@"PREFERENCE_KEY_ACCOUNT"];
+    if (account == nil) {
+        [userDefaults setObject:@"GoldenPlanet" forKey:@"PREFERENCE_KEY_ACCOUNT"];
+        [userDefaults synchronize];
+    }
+    
+    NSString *dataset = [userDefaults objectForKey:@"PREFERENCE_KEY_DATASET"];
+    if (dataset == nil) {
+        [userDefaults setObject:@"gp_test" forKey:@"PREFERENCE_KEY_DATASET"];
+        [userDefaults synchronize];
+    }
+
+    [self.evergage setUserId: userId != nil ? userId : @"gp_nhkim"];
+    
+    [self.evergage startWithClientConfiguration:^(EVGClientConfigurationBuilder * _Nonnull builder) {
+        builder.account = account != nil ? account : @"gp_nhkim";
+        builder.dataset = dataset != nil ? dataset : @"gp_test";
+        builder.usePushNotifications = TRUE;
+    }];
+    
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self configureMcpSDK];
+    
     return YES;
 }
 

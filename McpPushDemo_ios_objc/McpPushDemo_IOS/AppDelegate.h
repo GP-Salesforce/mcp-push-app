@@ -10,5 +10,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 
+- (void)configureMcpSDK;
+
 @end
 
