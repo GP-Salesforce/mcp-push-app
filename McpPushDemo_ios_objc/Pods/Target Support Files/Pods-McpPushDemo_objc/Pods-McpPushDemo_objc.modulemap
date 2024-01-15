@@ -1,6 +1,0 @@
-framework module Pods_McpPushDemo_objc {
-  umbrella header "Pods-McpPushDemo_objc-umbrella.h"
-
-  export *
-  module * { export * }
-}
