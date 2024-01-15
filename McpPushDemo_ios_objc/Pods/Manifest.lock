@@ -1,0 +1,16 @@
+PODS:
+  - Evergage (1.4.0)
+
+DEPENDENCIES:
+  - Evergage
+
+SPEC REPOS:
+  trunk:
+    - Evergage
+
+SPEC CHECKSUMS:
+  Evergage: cfc0243b769c07fce5ccc4562505ae5f299c8749
+
+PODFILE CHECKSUM: 68553b01023fb75153775e3c115a8dcbf41c1889
+
+COCOAPODS: 1.14.3
