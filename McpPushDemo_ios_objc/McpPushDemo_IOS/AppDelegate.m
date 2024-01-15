@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 @import Evergage;
+@import FirebaseCore;
 
 @interface AppDelegate ()
 
@@ -15,8 +16,6 @@
 @end
 
 @implementation AppDelegate
-
-
 
 
 
@@ -48,6 +47,10 @@
         [userDefaults synchronize];
     }
 
+//    아래 설정코드만으로 자동 추적되는 이벤트들 :
+//    App events (launch, install, upgrade, foreground, background, and so on)
+//    Miscellaneous SDK-handled tracking and events: campaigns (In-App), view time. accumulation, any APIs reduced by swizzling, and so on
+    
     [self.evergage setUserId: userId != nil ? userId : @"gp_nhkim"];
     
     [self.evergage startWithClientConfiguration:^(EVGClientConfigurationBuilder * _Nonnull builder) {
@@ -61,6 +64,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [FIRApp configure];
+    
     [self configureMcpSDK];
     
     return YES;
