@@ -41,6 +41,7 @@
 		016ED9BF2B5568D3002F2FD2 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9BE2B5568D3002F2FD2 /* FirebaseRemoteConfigSwift */; };
 		016ED9C12B5568D3002F2FD2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9C02B5568D3002F2FD2 /* FirebaseStorage */; };
 		016ED9C32B5568D3002F2FD2 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9C22B5568D3002F2FD2 /* FirebaseStorageCombine-Community */; };
+		01987DD32B5F8BDC00E7BB47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */; };
 		89CBAD13A3881DF024B84E1D /* Pods_McpPushDemo_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4426238C51B24DB7EB2478F /* Pods_McpPushDemo_IOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,8 @@
 		016ED9832B5504F1002F2FD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		016ED9852B5504F1002F2FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016ED9862B5504F1002F2FD2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01987DD42B5FBC1A00E7BB47 /* McpPushDemo_IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = McpPushDemo_IOS.entitlements; sourceTree = "<group>"; };
 		1071B430E1C8C4BC43FB6A19 /* Pods-McpPushDemo_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-McpPushDemo_IOS.debug.xcconfig"; path = "Target Support Files/Pods-McpPushDemo_IOS/Pods-McpPushDemo_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9443A9EDE00C6FF3C3158D04 /* Pods-McpPushDemo_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-McpPushDemo_IOS.release.xcconfig"; path = "Target Support Files/Pods-McpPushDemo_IOS/Pods-McpPushDemo_IOS.release.xcconfig"; sourceTree = "<group>"; };
 		B4426238C51B24DB7EB2478F /* Pods_McpPushDemo_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_McpPushDemo_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +125,8 @@
 		016ED9732B5504F0002F2FD2 /* McpPushDemo_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				01987DD42B5FBC1A00E7BB47 /* McpPushDemo_IOS.entitlements */,
+				01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */,
 				016ED9742B5504F0002F2FD2 /* AppDelegate.h */,
 				016ED9752B5504F0002F2FD2 /* AppDelegate.m */,
 				016ED9772B5504F0002F2FD2 /* SceneDelegate.h */,
@@ -245,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016ED9842B5504F1002F2FD2 /* LaunchScreen.storyboard in Resources */,
+				01987DD32B5F8BDC00E7BB47 /* GoogleService-Info.plist in Resources */,
 				016ED9812B5504F1002F2FD2 /* Assets.xcassets in Resources */,
 				016ED97F2B5504F0002F2FD2 /* Main.storyboard in Resources */,
 			);
@@ -433,11 +439,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = McpPushDemo_IOS/McpPushDemo_IOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LS78CH973;
+				DEVELOPMENT_TEAM = 945Y4FNT8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = McpPushDemo_IOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mcp Demo";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -448,7 +457,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.goldenplanet.mcppushdemo-ios.McpPushDemo-IOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.goldenplanet.mcpdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -464,11 +473,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = McpPushDemo_IOS/McpPushDemo_IOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LS78CH973;
+				DEVELOPMENT_TEAM = 945Y4FNT8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = McpPushDemo_IOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mcp Demo";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,7 +491,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.goldenplanet.mcppushdemo-ios.McpPushDemo-IOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.goldenplanet.mcpdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
