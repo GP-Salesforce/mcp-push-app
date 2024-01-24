@@ -46,10 +46,10 @@
         [userDefaults setObject:@"gp_test" forKey:@"PREFERENCE_KEY_DATASET"];
         [userDefaults synchronize];
     }
-
-//    아래 설정코드만으로 자동 추적되는 이벤트들 :
-//    App events (launch, install, upgrade, foreground, background, and so on)
-//    Miscellaneous SDK-handled tracking and events: campaigns (In-App), view time. accumulation, any APIs reduced by swizzling, and so on
+    
+    //    아래 설정코드만으로 자동 추적되는 이벤트들 :
+    //    App events (launch, install, upgrade, foreground, background, and so on)
+    //    Miscellaneous SDK-handled tracking and events: campaigns (In-App), view time. accumulation, any APIs reduced by swizzling, and so on
     
     [self.evergage setUserId: userId != nil ? userId : @"gp_nhkim"];
     
@@ -62,14 +62,60 @@
     
 }
 
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
+    [self configureMcpSDK];
+    return YES;
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [FIRApp configure];
     
-    [self configureMcpSDK];
+    [self registerNoti];
+    
     
     return YES;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
+    const unsigned char *dataBuffer = (const unsigned char *)deviceToken.bytes;
+    NSMutableString *hexString  = [NSMutableString stringWithCapacity:(deviceToken.length * 2)];
+    for (int i = 0; i < deviceToken.length; ++i) {
+        [hexString appendFormat:@"%02x", dataBuffer[i]];
+    }
+    NSString *result = [hexString copy];
+    NSLog(@"deviceToken : %@", result);
+    //    if using APNS
+    
+    //    if using Firebase
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError");
+}
+
+#pragma mark - Push Setting
+- (void)registerNoti {
+    if([UNUserNotificationCenter class] != nil) {
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!error) {
+                if (granted) {
+                    NSLog(@"Notification granted");
+                }
+            }
+        }];
+        
+    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
 
 
 #pragma mark - UISceneSession lifecycle
