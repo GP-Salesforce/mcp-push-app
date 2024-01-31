@@ -7,8 +7,10 @@
 
 #import <UIKit/UIKit.h>
 @import UserNotifications;
+@import FirebaseCore;
+@import FirebaseMessaging;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 
 
 - (void)configureMcpSDK;
