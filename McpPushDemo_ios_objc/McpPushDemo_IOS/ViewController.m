@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *etUserID;
 @property (weak, nonatomic) IBOutlet UITextField *etAccount;
 @property (weak, nonatomic) IBOutlet UITextField *etDataSet;
+@property (weak, nonatomic) IBOutlet UILabel *tvVersion;
 
 @end
 
@@ -35,7 +36,7 @@
     } else {
         self.etUserID.text = userId;
     }
-    
+                                
     NSString *account = [userDefaults objectForKey:@"PREFERENCE_KEY_ACCOUNT"];
     if (account == nil) {
         self.etAccount.text = @"GoldenPlanet";
@@ -54,7 +55,20 @@
         self.etDataSet.text = dataset;
     }
     
+
+    //빌드 / 버전 표시
     
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    self.tvVersion.text = [NSString stringWithFormat:@"%@ / %@", build, version];
+    
+    
+    
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 

@@ -7,7 +7,7 @@
 
 #import "AppDelegate.h"
 @import Evergage;
-@import FirebaseCore;
+
 
 @interface AppDelegate ()
 
@@ -58,20 +58,21 @@
         builder.dataset = dataset != nil ? dataset : @"gp_test";
         builder.usePushNotifications = TRUE;
     }];
-    
-    
 }
 
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
+    NSLog(@"willFinishLaunchingWithOptions");
     [self configureMcpSDK];
     return YES;
 }
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"didFinishLaunchingWithOptions");
     // Override point for customization after application launch.
     [FIRApp configure];
+    [FIRMessaging messaging].delegate = self;
     
     [self registerNoti];
     
@@ -88,15 +89,47 @@
     }
     NSString *result = [hexString copy];
     NSLog(@"deviceToken : %@", result);
-    //    if using APNS
     
+    [FIRMessaging messaging].APNSToken = deviceToken;
+  //  [self.evergage setFirebaseToken:result];
+    //    if using APNS
+    //    [self.evergage setAPNSToken:deviceToken];
     //    if using Firebase
     
 }
 
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"didFailToRegisterForRemoteNotificationsWithError");
 }
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    NSLog(@"[willPresentNotification] userInfo : %@", userInfo);
+    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+}
+
+- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"[didReceiveRegistrationToken] fcmToken : %@", fcmToken);
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"[didReceiveRemoteNotification] userInfo : %@", userInfo);
+    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    NSLog(@"[didReceiveNotificationResponse] userInfo : %@", userInfo);
+    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    
+    completionHandler();
+}
+
 
 #pragma mark - Push Setting
 - (void)registerNoti {
