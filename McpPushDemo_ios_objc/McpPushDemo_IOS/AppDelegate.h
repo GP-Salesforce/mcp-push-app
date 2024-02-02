@@ -9,11 +9,13 @@
 @import UserNotifications;
 @import FirebaseCore;
 @import FirebaseMessaging;
+@import FirebaseAuth;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 
 
 - (void)configureMcpSDK;
+- (void)resetMcpSDK;
 
 @end
 
