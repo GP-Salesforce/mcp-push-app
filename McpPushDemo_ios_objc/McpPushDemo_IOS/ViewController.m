@@ -84,7 +84,8 @@
                                                      handler:^(UIAlertAction *action){
         [self saveData];
         //AOS와 달리 IOS는 코드 레벨에서 앱을 재시작시킬수 없음
-        [(AppDelegate *)[UIApplication sharedApplication].delegate configureMcpSDK];
+        [(AppDelegate *)[UIApplication sharedApplication].delegate resetMcpSDK];
+//        [(AppDelegate *)[UIApplication sharedApplication].delegate configureMcpSDK];
     }];
     
     [alertController addAction:okAction];

@@ -22,6 +22,7 @@
 //SDK 초기화
 - (void)configureMcpSDK {
     self.evergage = [Evergage sharedInstance];
+    
 #ifdef DEBUG
     self.evergage.logLevel = EVGLogLevelWarn;
 #endif
@@ -60,9 +61,48 @@
     }];
 }
 
+- (void) resetMcpSDK {
+    [self.evergage reset];
+    //테스트용 정보 설정 코드
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userId = [userDefaults objectForKey:@"PREFERENCE_KEY_USER_ID"];
+    if (userId == nil) {
+        [userDefaults setObject:@"gp_nhkim" forKey:@"PREFERENCE_KEY_USER_ID"];
+        [userDefaults synchronize];
+    }
+    
+    NSString *account = [userDefaults objectForKey:@"PREFERENCE_KEY_ACCOUNT"];
+    if (account == nil) {
+        [userDefaults setObject:@"GoldenPlanet" forKey:@"PREFERENCE_KEY_ACCOUNT"];
+        [userDefaults synchronize];
+    }
+    
+    NSString *dataset = [userDefaults objectForKey:@"PREFERENCE_KEY_DATASET"];
+    if (dataset == nil) {
+        [userDefaults setObject:@"gp_test" forKey:@"PREFERENCE_KEY_DATASET"];
+        [userDefaults synchronize];
+    }
+    
+    //    아래 설정코드만으로 자동 추적되는 이벤트들 :
+    //    App events (launch, install, upgrade, foreground, background, and so on)
+    //    Miscellaneous SDK-handled tracking and events: campaigns (In-App), view time. accumulation, any APIs reduced by swizzling, and so on
+    
+    [self.evergage setUserId: userId != nil ? userId : @"gp_nhkim"];
+    
+    [self.evergage startWithClientConfiguration:^(EVGClientConfigurationBuilder * _Nonnull builder) {
+        builder.account = account != nil ? account : @"gp_nhkim";
+        builder.dataset = dataset != nil ? dataset : @"gp_test";
+        builder.usePushNotifications = TRUE;
+    }];
+    
+}
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
     NSLog(@"willFinishLaunchingWithOptions");
+    [FIRApp configure];
+    [FIRMessaging messaging].delegate = self;
+    
     [self configureMcpSDK];
     return YES;
 }
@@ -71,8 +111,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"didFinishLaunchingWithOptions");
     // Override point for customization after application launch.
-    [FIRApp configure];
-    [FIRMessaging messaging].delegate = self;
     
     [self registerNoti];
     
@@ -81,21 +119,16 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     const unsigned char *dataBuffer = (const unsigned char *)deviceToken.bytes;
     NSMutableString *hexString  = [NSMutableString stringWithCapacity:(deviceToken.length * 2)];
     for (int i = 0; i < deviceToken.length; ++i) {
         [hexString appendFormat:@"%02x", dataBuffer[i]];
     }
     NSString *result = [hexString copy];
-    NSLog(@"deviceToken : %@", result);
+    NSLog(@"[didRegisterForRemoteNotificationsWithDeviceToken] deviceToken : %@", result);
     
     [FIRMessaging messaging].APNSToken = deviceToken;
-  //  [self.evergage setFirebaseToken:result];
-    //    if using APNS
-    //    [self.evergage setAPNSToken:deviceToken];
-    //    if using Firebase
-    
+   
 }
 
 
@@ -103,16 +136,10 @@
     NSLog(@"didFailToRegisterForRemoteNotificationsWithError");
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
-    NSDictionary *userInfo = notification.request.content.userInfo;
-    NSLog(@"[willPresentNotification] userInfo : %@", userInfo);
-    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
-    
-    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
-}
 
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
     NSLog(@"[didReceiveRegistrationToken] fcmToken : %@", fcmToken);
+    // 어플리케이션 서버에 토큰을 보낼 경우
     
 }
 
@@ -122,10 +149,20 @@
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    NSLog(@"[willPresentNotification] userInfo : %@", userInfo);
+    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    //    푸시받았을 때
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+}
+
+
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+//  푸시 탭할때
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     NSLog(@"[didReceiveNotificationResponse] userInfo : %@", userInfo);
-    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+//    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
     
     completionHandler();
 }
