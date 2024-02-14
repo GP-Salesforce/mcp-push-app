@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.evergage.android.Campaign;
 import com.evergage.android.CampaignHandler;
+import com.evergage.android.ClientConfiguration;
 import com.evergage.android.Evergage;
 import com.evergage.android.Screen;
 import com.evergage.android.promote.Category;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private EditText etUserId, etAccount, etDataSet;
-    private Button btnSave;
+    private Button btnAllSave, btnIdSave;
     private TextView tvVersion, tvDensity, tvPPI;
 
     private Campaign activeCampaign;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         etAccount = findViewById(R.id.et_account);
         etDataSet = findViewById(R.id.et_dataset);
 
-        btnSave = findViewById(R.id.bt_save);
+        btnAllSave = findViewById(R.id.bt_all_save);
+        btnIdSave = findViewById(R.id.bt_id_save);
 
         String userId = SharedPrefHelper.getUserId();
         String account = SharedPrefHelper.getAccount();
@@ -56,21 +58,45 @@ public class MainActivity extends AppCompatActivity {
         etAccount.setText(account);
         etDataSet.setText(dataset);
 
-        btnSave.setOnClickListener(view -> {
+        btnAllSave.setOnClickListener(view -> {
             SharedPrefHelper.setUserId(etUserId.getText().toString());
             SharedPrefHelper.setAccount(etAccount.getText().toString());
             SharedPrefHelper.setDataSet(etDataSet.getText().toString());
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("안내").setMessage("앱이 종료됩니다. 앱을 재실행하면 변경설정이 반영됩니다.");
+            builder.setTitle("안내").setMessage("UserId, Account, DataSet이 재설정됩니다");
             builder.setPositiveButton("확인", (dialog, id) -> {
-                finish();
-                System.exit(0);
+                Evergage evergage = Evergage.getInstance();
+                evergage.reset();
+
+
+                evergage.setUserId(etUserId.getText().toString());
+                evergage.start(new ClientConfiguration.Builder()
+                        .account(etAccount.getText().toString())
+                        .dataset(etDataSet.getText().toString())
+                        .usePushNotifications(true)
+                        .build());
             });
 
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
+
+
+        btnIdSave.setOnClickListener(view -> {
+            SharedPrefHelper.setUserId(etUserId.getText().toString());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("안내").setMessage("UserId가 재설정됩니다.");
+            builder.setPositiveButton("확인", (dialog, id) -> {
+                Evergage evergage = Evergage.getInstance();
+
+                evergage.setUserId(etUserId.getText().toString());
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+
 
         tvVersion = findViewById(R.id.tv_version);
         tvDensity = findViewById(R.id.tv_density);
@@ -78,14 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
         String swVerName = CommonUtil.getAppVersionName(this);
         String swVerCode = String.valueOf(CommonUtil.getAppVersionCode(this));
-        tvVersion.setText("Version : "+swVerCode+"/"+swVerName);
+        tvVersion.setText("Version : " + swVerCode + "/" + swVerName);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int densityDpi = (int)(metrics.density * 160f);
-        tvDensity.setText("Density : "+densityDpi);
+        int densityDpi = (int) (metrics.density * 160f);
+        tvDensity.setText("Density : " + densityDpi);
 
         float ppi = CommonUtil.getDevicePPI(this);
-        tvPPI.setText("PPI : "+ ppi);
+        tvPPI.setText("PPI : " + ppi);
     }
 
 
@@ -107,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!campaign.isControlGroup()) {
                     activeCampaign = campaign;
-                    String msg = "New Active campaign name : "+campaign.getCampaignName() +
-                            ", target : "+campaign.getTarget()+", data : "+campaign.getData();
+                    String msg = "New Active campaign name : " + campaign.getCampaignName() +
+                            ", target : " + campaign.getTarget() + ", data : " + campaign.getData();
 
                     LogMsg.d(msg);
                     showDialog(msg);
@@ -120,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
             screen.setCampaignHandler(handler, "featuredProduct");
         }
     }
-
 
 
     private void refreshScreen() {
@@ -141,12 +166,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         // ... your content fetching/displaying, etc.
     }
 
 
-    private void showDialog(String msg){
+    private void showDialog(String msg) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this)

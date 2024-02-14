@@ -104,21 +104,37 @@
             android:layout_weight="0.74"
             android:background="@drawable/bg_et"
             android:gravity="center"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:singleLine="true"
             android:textSize="18dp" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_save"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="저장"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_3rd" />
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/ll_3rd"
+        app:layout_constraintTop_toBottomOf="@id/ll_3rd">
+
+        <Button
+            android:id="@+id/bt_all_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="모두 저장" />
+
+        <Button
+            android:id="@+id/bt_id_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="ID 저장" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_version"
@@ -127,7 +143,7 @@
         android:layout_marginTop="20dp"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/bt_save"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_btn" />
 
     <TextView
         android:id="@+id/tv_density"
@@ -138,22 +154,20 @@
         android:paddingBottom="16dp"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tv_version"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_version" />
 
 
     <TextView
         android:id="@+id/tv_ppi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:paddingBottom="16dp"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tv_version"
-        app:layout_constraintStart_toEndOf="@id/tv_density"/>
-
-
+        app:layout_constraintStart_toEndOf="@id/tv_density"
+        app:layout_constraintTop_toBottomOf="@id/tv_version" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
