@@ -128,7 +128,7 @@
     NSLog(@"[didRegisterForRemoteNotificationsWithDeviceToken] deviceToken : %@", result);
     
     [FIRMessaging messaging].APNSToken = deviceToken;
-   
+    
 }
 
 
@@ -154,15 +154,36 @@
     NSLog(@"[willPresentNotification] userInfo : %@", userInfo);
     [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
     //    푸시받았을 때
-    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+    if (@available(iOS 14.0, *)) {
+        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBanner);
+    } else {
+        // iOS 14 미만에서는 Banner 옵션을 사용하지 않음
+        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
+    }
 }
 
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-//  푸시 탭할때
+//  푸시 탭할때 처리
     NSDictionary *userInfo = response.notification.request.content.userInfo;
-    NSLog(@"[didReceiveNotificationResponse] userInfo : %@", userInfo);
-//    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    
+    NSString *sidValue = userInfo[@"_sid"];
+    if (sidValue) {
+        // _sid 키가 있고, 해당 값이 SFMC라면 MCE에서 보내진 푸시
+        if ([sidValue isEqualToString:@"SFMC"]) {
+            NSLog(@"[didReceiveRemoteNotification] This is from MCE");
+        }
+    } else {
+        // MCP나 그 외 푸시 플랫폼 병행사용한다면 여기서 분기처리할 것
+        NSLog(@"[didReceiveRemoteNotification] This is from MCP");
+        NSString *pushLink = userInfo[@"pushLink"];
+        //MCP 푸시에 URL이 실려있을 경우
+        if (pushLink) {
+            // pushLink로 실려온 URL로 이동 처리
+            NSLog(@"[didReceiveRemoteNotification] pushLink : %@", pushLink);
+        }
+    }
     
     completionHandler();
 }
