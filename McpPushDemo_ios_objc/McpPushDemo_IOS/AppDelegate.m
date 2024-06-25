@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 @import Evergage;
+@import FirebaseCore;
 
 
 @interface AppDelegate ()
@@ -100,7 +101,6 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
     NSLog(@"willFinishLaunchingWithOptions");
-    [FIRApp configure];
     [FIRMessaging messaging].delegate = self;
     
     [self configureMcpSDK];
@@ -111,7 +111,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"didFinishLaunchingWithOptions");
     // Override point for customization after application launch.
-    
+    [FIRApp configure];
     [self registerNoti];
     
     

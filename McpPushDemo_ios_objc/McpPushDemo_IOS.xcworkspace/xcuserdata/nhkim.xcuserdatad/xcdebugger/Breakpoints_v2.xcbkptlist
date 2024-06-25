@@ -79,8 +79,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "72">
+                  endingLineNumber = "65">
                </Location>
                <Location
                   uuid = "C846E73E-2D7C-46F2-A493-64503DCE953C - 5b4a0a232907b61e"
@@ -94,8 +93,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "60">
+                  endingLineNumber = "54">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -110,8 +108,8 @@
             filePath = "McpPushDemo_IOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "-configureMcpSDK"
             landmarkType = "7">
             <Locations>
@@ -127,8 +125,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "124">
+                  endingLineNumber = "29">
                </Location>
                <Location
                   uuid = "92CFE3A9-0376-440D-A769-651F48BF759B - 70ae75e8bb19d58c"
@@ -142,8 +139,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "124">
+                  endingLineNumber = "31">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -158,8 +154,8 @@
             filePath = "McpPushDemo_IOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "-configureMcpSDK"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +186,8 @@
             filePath = "McpPushDemo_IOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-configureMcpSDK"
             landmarkType = "7">
          </BreakpointContent>
@@ -224,7 +220,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
             endingLineNumber = "178"
-            landmarkName = "-registerNoti"
+            landmarkName = "-userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -255,8 +251,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "764">
+                  endingLineNumber = "60">
                </Location>
                <Location
                   uuid = "85F4033C-8609-4D65-9E4C-10A644B5BBC4 - 833b63ecd34347ef"
@@ -270,8 +265,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "676">
+                  endingLineNumber = "59">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -304,7 +298,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "-userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:"
+            landmarkName = "-userNotificationCenter:willPresentNotification:withCompletionHandler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

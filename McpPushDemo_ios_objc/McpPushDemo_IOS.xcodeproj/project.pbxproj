@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016299222C2A679600E39E8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 016299212C2A679600E39E8A /* GoogleService-Info.plist */; };
 		016ED9762B5504F0002F2FD2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016ED9752B5504F0002F2FD2 /* AppDelegate.m */; };
 		016ED9792B5504F0002F2FD2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016ED9782B5504F0002F2FD2 /* SceneDelegate.m */; };
 		016ED97C2B5504F0002F2FD2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016ED97B2B5504F0002F2FD2 /* ViewController.m */; };
@@ -41,11 +42,11 @@
 		016ED9BF2B5568D3002F2FD2 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9BE2B5568D3002F2FD2 /* FirebaseRemoteConfigSwift */; };
 		016ED9C12B5568D3002F2FD2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9C02B5568D3002F2FD2 /* FirebaseStorage */; };
 		016ED9C32B5568D3002F2FD2 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 016ED9C22B5568D3002F2FD2 /* FirebaseStorageCombine-Community */; };
-		01987DD32B5F8BDC00E7BB47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */; };
 		89CBAD13A3881DF024B84E1D /* Pods_McpPushDemo_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4426238C51B24DB7EB2478F /* Pods_McpPushDemo_IOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		016299212C2A679600E39E8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		016ED9712B5504F0002F2FD2 /* McpPushDemo_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = McpPushDemo_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016ED9742B5504F0002F2FD2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		016ED9752B5504F0002F2FD2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		016ED9832B5504F1002F2FD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		016ED9852B5504F1002F2FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016ED9862B5504F1002F2FD2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01987DD42B5FBC1A00E7BB47 /* McpPushDemo_IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = McpPushDemo_IOS.entitlements; sourceTree = "<group>"; };
 		1071B430E1C8C4BC43FB6A19 /* Pods-McpPushDemo_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-McpPushDemo_IOS.debug.xcconfig"; path = "Target Support Files/Pods-McpPushDemo_IOS/Pods-McpPushDemo_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9443A9EDE00C6FF3C3158D04 /* Pods-McpPushDemo_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-McpPushDemo_IOS.release.xcconfig"; path = "Target Support Files/Pods-McpPushDemo_IOS/Pods-McpPushDemo_IOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,9 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				01987DD42B5FBC1A00E7BB47 /* McpPushDemo_IOS.entitlements */,
-				01987DD22B5F8BDC00E7BB47 /* GoogleService-Info.plist */,
 				016ED9742B5504F0002F2FD2 /* AppDelegate.h */,
 				016ED9752B5504F0002F2FD2 /* AppDelegate.m */,
+				016299212C2A679600E39E8A /* GoogleService-Info.plist */,
 				016ED9772B5504F0002F2FD2 /* SceneDelegate.h */,
 				016ED9782B5504F0002F2FD2 /* SceneDelegate.m */,
 				016ED97A2B5504F0002F2FD2 /* ViewController.h */,
@@ -250,7 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016ED9842B5504F1002F2FD2 /* LaunchScreen.storyboard in Resources */,
-				01987DD32B5F8BDC00E7BB47 /* GoogleService-Info.plist in Resources */,
+				016299222C2A679600E39E8A /* GoogleService-Info.plist in Resources */,
 				016ED9812B5504F1002F2FD2 /* Assets.xcassets in Resources */,
 				016ED97F2B5504F0002F2FD2 /* Main.storyboard in Resources */,
 			);
